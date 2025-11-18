@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
             },
             name_biodata: {
                 type: DataTypes.STRING,
-                allowNul: true,
+                allowNull: true,
                 unique: true
             },
             id_department: {
@@ -22,12 +22,10 @@ module.exports = (sequelize, DataTypes) => {
                 onUpdate: 'CASCADE',
                 onDelete: 'SET NULL'
             },
-            createdAt: DataTypes.DATE,
-            updateAt: DataTypes.DATE
         },
         {
         tableName: "biodata", // wajib sama kayak migration
-        timestamps: false, // kamu pakai createdAt + updateAt manual
+        timestamps: true, 
         }
     );
 

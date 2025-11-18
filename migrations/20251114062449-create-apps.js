@@ -24,7 +24,7 @@ module.exports = {
         onDelete: 'SET NULL'
       },
       createdAt: Sequelize.DATE,
-      updateAt: Sequelize.DATE
+      updatedAt: Sequelize.DATE
     });
   },
 

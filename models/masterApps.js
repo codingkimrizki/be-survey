@@ -1,23 +1,23 @@
 module.exports = (sequelize, DataTypes) => {
-    const department = sequelize.define (
-        "department",
+    const masterApps = sequelize.define (
+        "masterApps",
         {
-            id_department: {
+            id_master_apps: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
                 allowNull: false
             },
-            name_department: {
+            name_master_apps: {
                 type:DataTypes.STRING,
                 allowNull: false,
                 unique: true
             },
         },
         {
-        tableName: "department", // wajib sama kayak migration
+        tableName: "master_apps", // wajib sama kayak migration
         timestamps: true,
         }
     );
-    return department;
+    return masterApps;
 };

@@ -1,13 +1,13 @@
 import db from "../../models/index.js";
 
-const biodata = db.biodata;
-const department = db.department;
+const Biodata = db.biodata;
+const Department = db.department;
 
 //Get All
 export const getBiodatas = async (req, res) => {
   try {
-    const data = await biodata.findAll({
-        include: [{ model: department, attributes: ["name_department"] }]
+    const data = await Biodata.findAll({
+        include: [{ model: Department, attributes: ["name_department"] }]
     });
     res.json({
       message: "Success GET biodata",
@@ -22,7 +22,7 @@ export const getBiodatas = async (req, res) => {
 export const getBiodatasById = async (req, res) => {
   try {
     const { id } = req.params;
-    const bio = await biodata.findByPk(id);
+    const bio = await Biodata.findByPk(id);
     if (!bio) return res.status(404).json({ message: "Biodata not found" });
     res.json({ message: "Success GET Biodata", data: bio });
     } catch (error) {
@@ -34,13 +34,11 @@ export const getBiodatasById = async (req, res) => {
 export const createBiodata = async (req, res) => {
   try {
     const { name_biodata, id_department } = req.body;
-    if (!name_biodata) return res.status(400).json({ message: "name_biodata is required" });
+    if (!id_department) return res.status(400).json({ message: "biodata is required" });
 
-    const newBio = await biodata.create({
+    const newBio = await Biodata.create({
       name_biodata,
       id_department,
-      createdAt: new Date(),
-      updateAt: new Date(),
     });
 
     res.json({
@@ -58,7 +56,7 @@ export const updateBiodata = async (req, res) => {
     const { id } = req.params;
     const { name_biodata } = req.body;
 
-    const bio = await biodata.findByPk(id);
+    const bio = await Biodata.findByPk(id);
     if (!bio) return res.status(404).json({ message: "Biodata not found" });
 
     await bio.update({ name_biodata, updateAt: new Date() });
@@ -72,7 +70,7 @@ export const updateBiodata = async (req, res) => {
 export const deleteBiodata = async (req, res) => {
   try {
     const { id } = req.params;
-    const bio = await biodata.findByPk(id);
+    const bio = await Biodata.findByPk(id);
     if (!bio) return res.status(404).json({ message: "Biodata not found" });
 
     await bio.destroy();
