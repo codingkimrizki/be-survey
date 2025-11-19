@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
             name_biodata: {
                 type: DataTypes.STRING,
                 allowNull: true,
-                unique: true
+                unique: false
             },
             id_department: {
                 type: DataTypes.INTEGER,

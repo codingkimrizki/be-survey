@@ -1,16 +1,5 @@
 import pool from "../config/db.js";
 
-// export const getQuestions = async (req, res) => {
-//   try {
-//     const [rows] = await pool.query("SELECT * FROM apps");
-//     res.json(rows);
-//   } catch (error) {
-//     res.status(500).json({ message: "Failed to get questions", error: error.message });
-//   }
-// };
-
-// src/controllers/questionControllers.js
-
 export const getQuestions = async (req, res) => {
   try {
     // Nanti ambil dari DB

@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-    const masterApps = sequelize.define (
-        "masterApps",
+    const master_apps = sequelize.define (
+        "master_apps",
         {
             id_master_apps: {
                 type: DataTypes.INTEGER,
@@ -15,9 +15,9 @@ module.exports = (sequelize, DataTypes) => {
             },
         },
         {
-        tableName: "master_apps", // wajib sama kayak migration
+        tableName: "master_apps",
         timestamps: true,
         }
     );
-    return masterApps;
+    return master_apps;
 };

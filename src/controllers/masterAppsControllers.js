@@ -1,6 +1,6 @@
 import db from "../../models/index.js";
 
-const MasterApps = db.masterApps;
+const MasterApps = db.master_apps;
 
 //Get All
 export const getMasterApps = async (req, res) => {

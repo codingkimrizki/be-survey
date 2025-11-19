@@ -28,16 +28,17 @@ export const getAppsById = async (req, res) => {
     }
 };
 
-//POST
+
 export const createApps = async (req, res) => {
   try {
-    const { name_apps, id_biodata } = req.body;
-    if (!name_apps) return res.status(400).json({ message: "name_apps is required" });
+    const { id_biodata, id_master_apps } = req.body; // id_master_apps diharapkan array
+    if (!id_master_apps || !Array.isArray(id_master_apps) || id_master_apps.length === 0) {
+      return res.status(400).json({ message: "id_master_apps harus berupa array dan tidak kosong" });
+    }
 
-    const newApps = await Apps.create({
-      name_apps,
-      id_biodata,
-    });
+    const newApps = await Promise.all(
+      id_master_apps.map(appId => Apps.create({ id_biodata, id_master_apps: appId }))
+    );
 
     res.json({
       message: "Success CREATE Apps",
@@ -48,16 +49,17 @@ export const createApps = async (req, res) => {
   }
 };
 
+
 //PUT & Update
 export const updateApps = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name_apps} = req.body;
+    const { id_master_apps} = req.body;
 
     const apps = await Apps.findByPk(id);
     if (!apps) return res.status(404).json({ message: "Apps not found" });
 
-    await Apps.update(name_apps);
+    await Apps.update(id_master_apps);
     res.json({ message: "Success UPDATE apps", data: apps });
   } catch (error) {
     res.status(500).json({ error: error.message });
