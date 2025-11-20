@@ -1,7 +1,7 @@
 import express from "express";
 import { 
     getDepartments,
-    getDepartmentsById, 
+    getDepartmentById, 
     createDepartment,
     updateDepartment,
     deleteDepartment,
@@ -10,9 +10,9 @@ import {
 const router = express.Router();
 
 router.get("/", getDepartments);
-router.get("/:id", getDepartmentsById);
+router.get("/:id_department", getDepartmentById);
 router.post("/", createDepartment);
-router.put("/:id", updateDepartment);
-router.delete("/:id", deleteDepartment);
+router.put("/:id_department", updateDepartment);
+router.delete("/:id_department", deleteDepartment);
 
 export default router;

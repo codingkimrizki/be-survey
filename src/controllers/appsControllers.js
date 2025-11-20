@@ -1,14 +1,13 @@
 import db from "../../models/index.js";
 
 const Apps = db.apps;
-const Biodata = db.biodata;
 
 //Get All
 export const getApps = async (req, res) => {
   try {
-    const data = await Apps.findAll();
+    const data = await Apps.findAll(); //temukan Apps
     res.json({
-      message: "Success GET apps",
+      message: "Success GET Apps",
       data: data,
     });
   } catch (error) {
@@ -17,64 +16,82 @@ export const getApps = async (req, res) => {
 };
 
 //Get by ID
-export const getAppsById = async (req, res) => {
+export const getAppById = async (req, res) => {
   try {
-    const { id } = req.params;
-    const apps = await Apps.findByPk(id);
-    if (!apps) return res.status(404).json({ message: "Apps not found" });
-    res.json({ message: "Success GET Apps", data: apps });
+    const { id_app } = req.params;
+    const data = await Apps.findByPk(id_app); //temukan by ID
+
+    if (!data) 
+      return res.status(404).json({ message: "Apps not found" });
+
+    res.json({ message: "Success GET Apps", data: data });
     } catch (error) {
     res.status(500).json({ error: error.message });
     }
 };
 
-
-export const createApps = async (req, res) => {
+//POST
+export const createApp = async (req, res) => {
   try {
-    const { id_biodata, id_master_apps } = req.body; // id_master_apps diharapkan array
-    if (!id_master_apps || !Array.isArray(id_master_apps) || id_master_apps.length === 0) {
-      return res.status(400).json({ message: "id_master_apps harus berupa array dan tidak kosong" });
+    const { id_biodata, id_master_apps } = req.body;
+
+    if (!id_master_apps || !Array.isArray(id_master_apps)) {
+      return res.status(400).json({ message: "input must be an array" });
     }
 
-    const newApps = await Promise.all(
-      id_master_apps.map(appId => Apps.create({ id_biodata, id_master_apps: appId }))
+    const created = await Promise.all(
+      id_master_apps.map(appId => 
+        Apps.create({
+          id_biodata,
+          id_master_apps: appId
+        })
+      )
     );
 
-    res.json({
+    res.status(201).json({
       message: "Success CREATE Apps",
-      data: newApps,
+      data: created
     });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
   }
 };
 
 
+
 //PUT & Update
-export const updateApps = async (req, res) => {
+export const updateApp = async (req, res) => {
   try {
-    const { id } = req.params;
-    const { id_master_apps} = req.body;
+    const { id_apps } = req.params;
+    const { id_master_apps, id_biodata} = req.body;
 
-    const apps = await Apps.findByPk(id);
-    if (!apps) return res.status(404).json({ message: "Apps not found" });
+    const data = await Apps.findByPk(id_apps);
+    if (!data) 
+      return res.status(404).json({ message: "App not found" });
 
-    await Apps.update(id_master_apps);
-    res.json({ message: "Success UPDATE apps", data: apps });
+    await Apps.update({
+      id_master_apps,
+      id_biodata,
+    });
+    res.json({ 
+      message: "Success UPDATE apps", 
+      data: data });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
 // DELETE
-export const deleteApps = async (req, res) => {
+export const deleteApp = async (req, res) => {
   try {
-    const { id } = req.params;
-    const apps = await Apps.findByPk(id);
-    if (!apps) return res.status(404).json({ message: "Apps not found" });
+    const { id_apps } = req.params;
+    const data = await Apps.findByPk(id_apps); //temukan data dulu
+    if (!data) 
+      return res.status(404).json({ message: "App not found" });
 
-    await Apps.destroy();
-    res.json({ message: "Success DELETE Apps" });
+    await Apps.destroy(); //hapus data berdasarkan id_apps
+    res.json({ 
+      message: "Success DELETE App"});
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

@@ -6,6 +6,9 @@ import departmentRoutes from "./src/routes/departmentRoutes.js";
 import biodataRoutes from "./src/routes/biodataRoutes.js";
 import appsRoutes from "./src/routes/appsRoutes.js";
 import masterApps from "./src/routes/masterAppsRoutes.js";
+import answers from "./src/routes/answersRoutes.js";
+import pages from "./src/routes/pageRoutes.js";
+import questions from "./src/routes/questionRoutes.js";
 
 dotenv.config();
 
@@ -19,6 +22,9 @@ app.use("/api/departments", departmentRoutes);
 app.use("/api/biodatas", biodataRoutes);
 app.use("/api/apps", appsRoutes);
 app.use("/api/masterApps", masterApps);
+app.use("/api/answers", answers);
+app.use("/api/pages", pages);
+app.use("/api/questions", questions);
 
 
 // connect ke MySQL

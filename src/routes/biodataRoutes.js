@@ -1,7 +1,7 @@
 import express from "express";
 import { 
     getBiodatas,
-    getBiodatasById, 
+    getBiodataById, 
     createBiodata,
     updateBiodata,
     deleteBiodata,
@@ -10,9 +10,9 @@ import {
 const router = express.Router();
 
 router.get("/", getBiodatas);
-router.get("/:id", getBiodatasById);
+router.get("/:id_biodata", getBiodataById);
 router.post("/", createBiodata);
-router.put("/:id", updateBiodata);
-router.delete("/:id", deleteBiodata);
+router.put("/:id_biodata", updateBiodata);
+router.delete("/:id_biodata", deleteBiodata);
 
 export default router;

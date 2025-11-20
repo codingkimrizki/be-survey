@@ -2,6 +2,8 @@ import { Router } from "express";
 // import { getQuestions } from "../controllers/questionControllers.js";
 import {
   getQuestions,
+  getQuestionByID,
+  getQuestionsByPage,
   createQuestion,
   updateQuestion,
   deleteQuestion,
@@ -10,8 +12,10 @@ import {
 const router = Router();
 
 router.get("/", getQuestions);
+router.get("/:id_question", getQuestionByID);
+router.get('/page/:id_page', getQuestionsByPage);
 router.post("/", createQuestion);
-router.put("/:id", updateQuestion);
-router.delete("/:id", deleteQuestion);
+router.put("/:id_question", updateQuestion);
+router.delete("/:id_question", deleteQuestion);
 
 export default router;
