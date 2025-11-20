@@ -43,7 +43,6 @@ export const getQuestionsByPage = async (req, res) => {
   }
 };
 
-
 //POST
 export const createQuestion = async (req, res) => {
   try {
