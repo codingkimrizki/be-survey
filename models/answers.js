@@ -28,13 +28,23 @@ module.exports = (sequelize, DataTypes) => {
         onUpdate: "CASCADE",
         onDelete: "SET NULL",
       },
+      id_biodata: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'biodatas',
+          key: 'id_biodata'
+        },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
+      },
       answer_value: {
         type: DataTypes.TEXT, 
         allowNull: true
       },
     },
     {
-      tableName: "apps",
+      tableName: "answers",
       timestamps: true,
     }
   );

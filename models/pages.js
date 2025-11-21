@@ -16,8 +16,6 @@ module.exports = (sequelize, DataTypes) => {
       tableName: "pages",
       timestamps: true,
     }
-
   )
-  
   return pages;
 };

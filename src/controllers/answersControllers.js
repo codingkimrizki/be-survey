@@ -42,6 +42,14 @@ export const createAnswers = async (req, res) => {
             });
         }
 
+        // Optional: validasi minimal
+        const invalid = answers.some(a => !a.id_biodata || !a.id_apps || !a.id_question);
+        if (invalid) {
+          return res.status(400).json({
+            message: "Each answer must have id_biodata, id_app, and id_question"
+          });
+        }
+
         const created = await Answers.bulkCreate (answers); //input jawaban array
         res.status(201).json({
         message: "Success input Answers",
