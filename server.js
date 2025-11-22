@@ -9,6 +9,9 @@ import masterApps from "./src/routes/masterAppsRoutes.js";
 import answers from "./src/routes/answersRoutes.js";
 import pages from "./src/routes/pageRoutes.js";
 import questions from "./src/routes/questionRoutes.js";
+import scores from "./src/routes/scoreRoutes.js";
+import scoresBiodata from "./src/routes/scoreRoutesBiodata.js";
+import finalScore from "./src/routes/finalScoreRoutes.js";
 
 dotenv.config();
 
@@ -25,6 +28,9 @@ app.use("/api/masterApps", masterApps);
 app.use("/api/answers", answers);
 app.use("/api/pages", pages);
 app.use("/api/questions", questions);
+app.use("/api/scores", scores);
+app.use("/api/scoresBiodata", scoresBiodata);
+app.use("/api/finalScore", finalScore);
 
 
 // connect ke MySQL
